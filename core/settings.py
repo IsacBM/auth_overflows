@@ -174,7 +174,14 @@ SPECTACULAR_SETTINGS = {
 
 ALLOWED_HOSTS = ['*']
 
+CORS_ALLOW_CREDENTIALS = True
+
 CORS_ALLOWED_ORIGINS = [
+    "http://localhost",
     "http://localhost:8100",
-    "http://127.0.0.1:8100",
+    "http://127.0.0.1",
+    "https://localhost",
+    "capacitor://localhost",
+    "ionic://localhost",
 ]
+
