@@ -18,4 +18,5 @@ urlpatterns = [
     path("api/questoes/", include("questoes.urls")),
     path("api/questoes/", include("eventos.urls")),
     path("api/ranking/", include("ranking.urls")),
+    path("api/biblioteca/", include("biblioteca.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

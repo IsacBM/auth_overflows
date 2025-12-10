@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     "questoes",
     "eventos",
     "ranking",
+    "biblioteca",
 ]
 
 MIDDLEWARE = [
