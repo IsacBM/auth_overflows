@@ -20,8 +20,9 @@ class Profile(models.Model):
     data_nascimento = models.DateField()
     sexo = models.CharField(max_length=10, choices=SEXO_CHOICES)
     tipo_usuario = models.CharField(max_length=20, choices=TIPO_USUARIO_CHOICES)
+    pontuacao_total = models.PositiveIntegerField(default=0)
 
     aceitou_termos = models.BooleanField(default=False)
-
+    
     def __str__(self):
         return f"{self.user.username} - Perfil"

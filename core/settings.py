@@ -50,6 +50,11 @@ FRONTEND_URL = os.environ.get(
     "http://localhost:3000",
 )
 
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 # Application definition
 
 INSTALLED_APPS = [
@@ -67,6 +72,7 @@ INSTALLED_APPS = [
 
     'users',
     "questoes",
+    "eventos",
 ]
 
 MIDDLEWARE = [
@@ -146,7 +152,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
+# STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -168,7 +174,7 @@ SIMPLE_JWT = {
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Overflow - API💜',
     'DESCRIPTION': 'Bora meu time! :)',
-    'VERSION': 'v0.5',
+    'VERSION': 'v1.5',
     'SERVE_INCLUDE_SCHEMA': False,
 }
 
