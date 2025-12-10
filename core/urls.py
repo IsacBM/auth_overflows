@@ -17,4 +17,5 @@ urlpatterns = [
     path('api/auth/', include('users.urls')),
     path("api/questoes/", include("questoes.urls")),
     path("api/questoes/", include("eventos.urls")),
+    path("api/ranking/", include("ranking.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
