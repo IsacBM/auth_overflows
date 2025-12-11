@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from .models import Evento, ParticipacaoEvento
-
+from .models import Evento, ParticipacaoEvento, Questao, CasoTeste, Submissao, ResultadoTeste
 
 class EventoSerializer(serializers.ModelSerializer):
     criador = serializers.StringRelatedField(read_only=True)
@@ -73,7 +72,6 @@ class EventoSerializer(serializers.ModelSerializer):
 
         return attrs
 
-
 class ParticipacaoEventoSerializer(serializers.ModelSerializer):
     usuario = serializers.StringRelatedField(read_only=True)
     evento = serializers.StringRelatedField(read_only=True)
@@ -82,7 +80,6 @@ class ParticipacaoEventoSerializer(serializers.ModelSerializer):
         model = ParticipacaoEvento
         fields = ["id", "usuario", "evento", "entrou_em"]
         read_only_fields = ["id", "usuario", "evento", "entrou_em"]
-
 
 class EntrarNoEventoSerializer(serializers.Serializer):
     codigo_sala = serializers.CharField()
@@ -131,5 +128,66 @@ class EntrarNoEventoSerializer(serializers.Serializer):
             usuario=usuario,
             evento=evento
         )
-
         return evento
+
+class CasoTesteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CasoTeste
+        fields = ["id", "entrada", "saida_esperada", "ordem"]
+
+class QuestaoSerializer(serializers.ModelSerializer):
+    casos_teste = CasoTesteSerializer(many=True, read_only=True)
+    exemplos = serializers.ListField(child=serializers.DictField(), required=False)
+
+    class Meta:
+        model = Questao
+        fields = [
+            "id", "titulo", "descricao_curta", "enunciado",
+            "pontos", "tentativas", "dificuldade", "categoria",
+            "exemplos", "casos_teste", "criado_por", "criado_em"
+        ]
+        read_only_fields = ["criado_por", "criado_em"]
+
+class SubmissaoCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Submissao
+        fields = ["id", "questao", "codigo", "linguagem"]
+
+class ResultadoTesteSerializer(serializers.ModelSerializer):
+    caso = CasoTesteSerializer(read_only=True)
+    class Meta:
+        model = ResultadoTeste
+        fields = ["id", "caso", "status", "output", "mensagem", "tempo"]
+
+class SubmissaoDetailSerializer(serializers.ModelSerializer):
+    resultado = serializers.SerializerMethodField()
+    resultados = ResultadoTesteSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Submissao
+        fields = [
+            "id",
+            "questao",
+            "codigo",
+            "linguagem",
+            "enviada_em",
+            "tentativa_num",
+            "pontuacao",
+            "status",
+            "resultado",
+            "resultados",
+        ]
+
+    def get_resultado(self, obj):
+        qs = obj.resultados.all()
+        status_prioridade = ["ACCEPTED", "WRONG_ANSWER", "TIMEOUT", "RUNTIME_ERROR"]
+
+        lista_status = list(qs.values_list("status", flat=True))
+
+        if not lista_status:
+            return obj.status
+
+        for s in status_prioridade:
+            if s in lista_status:
+                return s
+        return lista_status[0]

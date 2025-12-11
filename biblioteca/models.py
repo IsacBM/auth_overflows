@@ -1,7 +1,6 @@
 from django.db import models
 
-
-class Language(models.Model):
+class Linguagem(models.Model):
     slug = models.SlugField(unique=True)  # "python", "c", "cpp", "csharp", "java", "javascript"
     nome = models.CharField(max_length=50)
     ordem = models.PositiveIntegerField(default=0)
@@ -9,7 +8,7 @@ class Language(models.Model):
     def __str__(self):
         return self.nome
 
-class LanguageTopic(models.Model):
+class TopicoLinguagem(models.Model):
     class Categoria(models.TextChoices):
         INTRO = "introducao", "Introdução"
         SINTAXE = "sintaxe", "Sintaxe"
@@ -20,7 +19,7 @@ class LanguageTopic(models.Model):
         FUNCOES = "funcoes", "Funções"
 
     language = models.ForeignKey(
-        Language,
+        Linguagem,
         on_delete=models.CASCADE,
         related_name="topicos",
     )

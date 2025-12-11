@@ -1,7 +1,7 @@
 from rest_framework import generics, permissions
 from drf_spectacular.utils import extend_schema
 
-from .models import Language, LanguageTopic
+from .models import Linguagem, TopicoLinguagem
 from .serializers import (
     LanguageSerializer,
     LanguageTopicListSerializer,
@@ -10,7 +10,7 @@ from .serializers import (
 
 @extend_schema(tags=["Biblioteca"])
 class ListarLinguagensView(generics.ListAPIView):
-    queryset = Language.objects.all().order_by("ordem")
+    queryset = Linguagem.objects.all().order_by("ordem")
     serializer_class = LanguageSerializer
     permission_classes = [permissions.AllowAny]
 
@@ -28,7 +28,7 @@ class ListarTopicosLinguagemView(generics.ListAPIView):
 
     def get_queryset(self):
         linguagem_slug = self.kwargs["language_slug"]
-        return LanguageTopic.objects.filter(
+        return TopicoLinguagem.objects.filter(
             language__slug=linguagem_slug
         ).order_by("ordem")
 
@@ -47,7 +47,7 @@ class DetalheTopicoLinguagemView(generics.RetrieveAPIView):
 
     def get_queryset(self):
         linguagem_slug = self.kwargs["language_slug"]
-        return LanguageTopic.objects.filter(language__slug=linguagem_slug)
+        return TopicoLinguagem.objects.filter(language__slug=linguagem_slug)
 
     @extend_schema(
         summary="Detalhar tópico de uma linguagem",

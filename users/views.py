@@ -9,6 +9,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from drf_spectacular.utils import extend_schema, OpenApiExample
 
 from .serializers import RegisterSerializer, UserSerializer, AlterarSenhaSerializer, EsqueciSenhaSerializer, RedefinirSenhaSerializer
+from drf_spectacular.utils import extend_schema
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     """
