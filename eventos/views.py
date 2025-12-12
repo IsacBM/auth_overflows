@@ -460,18 +460,18 @@ class DetalheSubmissaoView(generics.RetrieveAPIView):
     """
     Retorna os dados de uma submissão específica, incluindo:
     - 'resultado' (em resumo)
-    - 'resultados' (em detalhe por caso)
+    - 'resultados' (em detalhe)
     """
     queryset = Submissao.objects.all().prefetch_related(Prefetch("resultados"))
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = SubmissaoDetailSerializer
 
     @extend_schema(
-            summary="Ranking do evento (com posição avançada)",
+            summary="Ranking do evento",
             description=(
                 "Retorna ranking de participantes com campo 'posicao'. "
-                "Regras de desempate: pontos totais (maior melhor) > submissões totais (menor melhor) > "
-                "tempo apenas nas questões em comum (menor melhor) > tempo na questão de maior peso (menor melhor) > username."
+                "Regras de desempate: Pontos totais (maior melhor) > submissões totais (menor melhor) > "
+                "tempo apenas nas questões em comum (menor melhor) > tempo na questão de maior peso/dificuldade (menor melhor)"
             )
         )
     
@@ -493,12 +493,12 @@ class RankingEventoView(APIView):
     permission_classes = [permissions.AllowAny]
 
     @extend_schema(
-        summary="Ranking do evento (com posição avançada)",
-        description=(
-            "Retorna ranking de participantes com campo 'posicao'. "
-            "Regras de desempate: pontos totais (maior melhor) > submissões totais (menor melhor) > "
-            "tempo apenas nas questões em comum (menor melhor) > tempo na questão de maior peso (menor melhor) > username."
-        )
+            summary="Ranking do evento",
+            description=(
+                "Retorna ranking de participantes com campo 'posicao'. "
+                "Regras de desempate: Pontos totais (maior melhor) > submissões totais (menor melhor) > "
+                "tempo apenas nas questões em comum (menor melhor) > tempo na questão de maior peso/dificuldade (menor melhor)"
+            )
     )
     def get(self, request, evento_pk, *args, **kwargs):
         try:

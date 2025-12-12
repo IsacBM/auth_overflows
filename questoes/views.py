@@ -4,7 +4,7 @@ from .models import Questao
 from .serializers import QuestaoSerializer
 
 
-@extend_schema(tags=["Seção das Questões"])
+@extend_schema(tags=["Seção das Questões | Mobile"])
 class CriarQuestaoView(generics.CreateAPIView):
     serializer_class = QuestaoSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -20,7 +20,7 @@ class CriarQuestaoView(generics.CreateAPIView):
         serializer.save(autor=self.request.user)
 
 
-@extend_schema(tags=["Seção das Questões"])
+@extend_schema(tags=["Seção das Questões | Mobile"])
 class ListarQuestoesView(generics.ListAPIView):
     queryset = Questao.objects.all().order_by("-criada_em")
     serializer_class = QuestaoSerializer
@@ -34,7 +34,7 @@ class ListarQuestoesView(generics.ListAPIView):
         return super().get(request, *args, **kwargs)
 
 
-@extend_schema(tags=["Seção das Questões"])
+@extend_schema(tags=["Seção das Questões | Mobile"])
 class DetalheQuestaoView(generics.RetrieveAPIView):
     queryset = Questao.objects.all()
     serializer_class = QuestaoSerializer
@@ -48,7 +48,7 @@ class DetalheQuestaoView(generics.RetrieveAPIView):
         return super().get(request, *args, **kwargs)
 
 
-@extend_schema(tags=["Seção das Questões"])
+@extend_schema(tags=["Seção das Questões | Mobile"])
 class AtualizarQuestaoView(generics.UpdateAPIView):
     queryset = Questao.objects.all()
     serializer_class = QuestaoSerializer
@@ -74,7 +74,7 @@ class AtualizarQuestaoView(generics.UpdateAPIView):
         serializer.save()
 
 
-@extend_schema(tags=["Seção das Questões"])
+@extend_schema(tags=["Seção das Questões | Mobile"])
 class DeletarQuestaoView(generics.DestroyAPIView):
     queryset = Questao.objects.all()
     serializer_class = QuestaoSerializer
