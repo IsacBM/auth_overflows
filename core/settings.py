@@ -174,9 +174,25 @@ SIMPLE_JWT = {
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Overflow - API💜',
-    'DESCRIPTION': 'Bora meu time! :)',
-    'VERSION': 'v1.5',
+    'TITLE': 'Overflows - API💜',
+    'VERSION': 'v7.7.7',
+    'DESCRIPTION': """
+![build-status](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
+
+**🔗| Links Importantes:**
+| Aplicações       | Descrição                                                                                      | Link |
+|:----------------:|------------------------------------------------------------------------------------------------|:----:|
+| ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)             | Plataforma de design colaborativo utilizada para o desenvolvimento das interfaces e protótipos do projeto. | [Acessar Figma](https://www.figma.com/design/7KvFe5zj3b4og8Tm8tvXRI/Overflows--Plataforma?node-id=864-3896&t=8j7bmH85RYkQUSlo-1) |
+| ![Trello](https://img.shields.io/badge/Trello-0052CC?style=for-the-badge&logo=trello&logoColor=white)         | Painel de gerenciamento de tarefas e etapas do projeto, utilizado para planejar e acompanhar o progresso. | [Acessar Trello](https://trello.com/invite/b/673e0929c5a08c4c2020f7d3/ATTI25eef743694811373f6d4af1c42fc05f5A5EC004/overflows-plataforma) |
+| ![Diagrama DER](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white&style=for-the-badge) | Diagrama de Entidade e Relacionamento construido para a aplicação. | [Acessar DER](https://drive.google.com/file/d/1EPppXVI7d_7hbWngyZmi2-04Lg1JaxrJ/view?usp=sharing) |
+| ![Documentação](https://img.shields.io/badge/Google%20Docs-4285F4.svg?style=for-the-badge&logo=Google-Docs&logoColor=white) | Documento com os requisitos funcionais e não funcionais, além das regras de negócio da aplicação. | [Acessar Docs](https://docs.google.com/document/d/1Sb3_cj23-f6Yg1rz_So2Th-aTB0GH2kKfg3QU7ptzrs/edit?tab=t.0) |
+
+**Ambientes** <br>
+Plataforma: [https://www.overflows.com.br/](https://www.overflows.com.br/) <br>
+API: [https://auth-overflows.onrender.com/api/docs/](https://auth-overflows.onrender.com/api/docs/)
+
+Bora, meu time!💜 :)
+""",
     'SERVE_INCLUDE_SCHEMA': False,
 }
 

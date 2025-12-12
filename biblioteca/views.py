@@ -12,7 +12,7 @@ from .serializers import (
 class ListarLinguagensView(generics.ListAPIView):
     queryset = Linguagem.objects.all().order_by("ordem")
     serializer_class = LanguageSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
     @extend_schema(
         summary="Listar linguagens suportadas",
@@ -24,10 +24,10 @@ class ListarLinguagensView(generics.ListAPIView):
 @extend_schema(tags=["Biblioteca"])
 class ListarTopicosLinguagemView(generics.ListAPIView):
     serializer_class = LanguageTopicListSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        linguagem_slug = self.kwargs["language_slug"]
+        linguagem_slug = self.kwargs["texto_linguagem"]
         return TopicoLinguagem.objects.filter(
             language__slug=linguagem_slug
         ).order_by("ordem")
@@ -42,11 +42,11 @@ class ListarTopicosLinguagemView(generics.ListAPIView):
 @extend_schema(tags=["Biblioteca"])
 class DetalheTopicoLinguagemView(generics.RetrieveAPIView):
     serializer_class = LanguageTopicDetailSerializer
-    permission_classes = [permissions.AllowAny]
-    lookup_field = "slug"
+    permission_classes = [permissions.IsAuthenticated]
+    lookup_field = "topico"
 
     def get_queryset(self):
-        linguagem_slug = self.kwargs["language_slug"]
+        linguagem_slug = self.kwargs["texto_linguagem"]
         return TopicoLinguagem.objects.filter(language__slug=linguagem_slug)
 
     @extend_schema(

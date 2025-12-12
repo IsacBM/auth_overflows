@@ -8,12 +8,12 @@ from .views import (
 urlpatterns = [
     path("linguagens/", ListarLinguagensView.as_view(), name="listar-linguagens"),
     path(
-        "linguagens/<slug:language_slug>/topicos/",
+        "linguagens/<slug:texto_linguagem>/topicos/",
         ListarTopicosLinguagemView.as_view(),
         name="listar-topicos-linguagem",
     ),
     path(
-        "linguagens/<slug:language_slug>/topicos/<slug:slug>/",
+        "linguagens/<slug:texto_linguagem>/topicos/<slug:topico>/",
         DetalheTopicoLinguagemView.as_view(),
         name="detalhar-topico-linguagem",
     ),

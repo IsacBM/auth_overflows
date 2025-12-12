@@ -46,7 +46,7 @@ class CriarEventoView(generics.CreateAPIView):
 class ListarEventosView(generics.ListAPIView):
     queryset = Evento.objects.all().order_by("-criado_em")
     serializer_class = EventoSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
     @extend_schema(
         summary="Listar eventos",
@@ -60,7 +60,7 @@ class ListarEventosView(generics.ListAPIView):
 class DetalheEventoView(generics.RetrieveAPIView):
     queryset = Evento.objects.all()
     serializer_class = EventoSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
     @extend_schema(
         summary="Detalhar evento",
@@ -141,7 +141,7 @@ class EntrarNoEventoView(generics.GenericAPIView):
 @extend_schema(tags=["Seção de Eventos | CRUD Questões"])
 class ListarQuestoesDoEventoView(generics.ListAPIView):
     serializer_class = QuestaoSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
     @extend_schema(
         summary="Listar as questões do evento",
@@ -192,7 +192,7 @@ class CriarQuestaoNoEventoView(generics.CreateAPIView):
 class DetalharQuestaoView(generics.RetrieveAPIView):
     queryset = Questao.objects.all()
     serializer_class = QuestaoSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
     @extend_schema(
         summary="Detalhar questão",
@@ -490,7 +490,7 @@ class DetalheSubmissaoView(generics.RetrieveAPIView):
 # loucura do ranking
 @extend_schema(tags=["Seção de Eventos | Ranking"])
 class RankingEventoView(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
     @extend_schema(
             summary="Ranking do evento",
