@@ -1,12 +1,12 @@
 from rest_framework import generics, permissions
 from drf_spectacular.utils import extend_schema
 from .models import Questao
-from .serializers import QuestaoSerializer
+from .serializers import QuestaoEventoSerializer
 
 
 @extend_schema(tags=["Seção das Questões | Mobile"])
 class CriarQuestaoView(generics.CreateAPIView):
-    serializer_class = QuestaoSerializer
+    serializer_class = QuestaoEventoSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     @extend_schema(
@@ -23,7 +23,7 @@ class CriarQuestaoView(generics.CreateAPIView):
 @extend_schema(tags=["Seção das Questões | Mobile"])
 class ListarQuestoesView(generics.ListAPIView):
     queryset = Questao.objects.all().order_by("-criada_em")
-    serializer_class = QuestaoSerializer
+    serializer_class = QuestaoEventoSerializer
     permission_classes = [permissions.AllowAny]
 
     @extend_schema(
@@ -37,7 +37,7 @@ class ListarQuestoesView(generics.ListAPIView):
 @extend_schema(tags=["Seção das Questões | Mobile"])
 class DetalheQuestaoView(generics.RetrieveAPIView):
     queryset = Questao.objects.all()
-    serializer_class = QuestaoSerializer
+    serializer_class = QuestaoEventoSerializer
     permission_classes = [permissions.AllowAny]
 
     @extend_schema(
@@ -51,7 +51,7 @@ class DetalheQuestaoView(generics.RetrieveAPIView):
 @extend_schema(tags=["Seção das Questões | Mobile"])
 class AtualizarQuestaoView(generics.UpdateAPIView):
     queryset = Questao.objects.all()
-    serializer_class = QuestaoSerializer
+    serializer_class = QuestaoEventoSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     @extend_schema(
@@ -77,7 +77,7 @@ class AtualizarQuestaoView(generics.UpdateAPIView):
 @extend_schema(tags=["Seção das Questões | Mobile"])
 class DeletarQuestaoView(generics.DestroyAPIView):
     queryset = Questao.objects.all()
-    serializer_class = QuestaoSerializer
+    serializer_class = QuestaoEventoSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     @extend_schema(

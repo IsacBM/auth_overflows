@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Questao
 
 
-class QuestaoSerializer(serializers.ModelSerializer):
+class QuestaoEventoSerializer(serializers.ModelSerializer):
     autor = serializers.CharField(source="autor.username", read_only=True)
 
     class Meta:

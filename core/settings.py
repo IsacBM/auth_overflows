@@ -72,6 +72,7 @@ INSTALLED_APPS = [
 
     'users',
     "questoes",
+    "questao",
     "eventos",
     "ranking",
     "biblioteca",
