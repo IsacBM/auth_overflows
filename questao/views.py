@@ -39,7 +39,6 @@ class CriarQuestaoPlataformaView(generics.CreateAPIView):
             evento=None  # força ser da plataforma
         )
 
-
 @extend_schema(tags=["Seção de Questões | CRUD Plataforma"])
 class ListarQuestoesPlataformaView(generics.ListAPIView):
     serializer_class = QuestaoSerializer
@@ -128,10 +127,8 @@ class SubmeterSolucaoView(APIView):
         usuario = request.user
         questao = get_object_or_404(Questao, pk=questao_pk)
 
-        # 🔹 Contexto opcional: evento
         evento = questao.evento
 
-        # 🔐 Se for questão de evento, valida participação
         if evento:
             from eventos.models import ParticipacaoEvento
 
@@ -150,7 +147,6 @@ class SubmeterSolucaoView(APIView):
         codigo = serializer.validated_data["codigo"]
         linguagem = serializer.validated_data["linguagem"]
 
-        # 🔁 Controle de tentativas
         if questao.tentativas > 0:
             total_submissoes = Submissao.objects.filter(
                 usuario=usuario,
@@ -163,7 +159,6 @@ class SubmeterSolucaoView(APIView):
                     status=status.HTTP_400_BAD_REQUEST
                 )
 
-        # 🧱 Criação da submissão
         with transaction.atomic():
             tentativa_num = (
                 Submissao.objects.filter(usuario=usuario, questao=questao).count() + 1
@@ -178,7 +173,6 @@ class SubmeterSolucaoView(APIView):
                 status="processing",
             )
 
-        # 🚀 Judge0
         judge0_url = getattr(settings, "JUDGE0_SUBMIT_URL", None)
         judge0_key = getattr(settings, "JUDGE0_API_KEY", None)
         lang_map = getattr(settings, "JUDGE0_LANG_MAP", {})

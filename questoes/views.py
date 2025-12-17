@@ -19,7 +19,6 @@ class CriarQuestaoView(generics.CreateAPIView):
     def perform_create(self, serializer):
         serializer.save(autor=self.request.user)
 
-
 @extend_schema(tags=["Seção das Questões | Mobile"])
 class ListarQuestoesView(generics.ListAPIView):
     queryset = Questao.objects.all().order_by("-criada_em")
@@ -33,7 +32,6 @@ class ListarQuestoesView(generics.ListAPIView):
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
 
-
 @extend_schema(tags=["Seção das Questões | Mobile"])
 class DetalheQuestaoView(generics.RetrieveAPIView):
     queryset = Questao.objects.all()
@@ -46,7 +44,6 @@ class DetalheQuestaoView(generics.RetrieveAPIView):
     )
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
-
 
 @extend_schema(tags=["Seção das Questões | Mobile"])
 class AtualizarQuestaoView(generics.UpdateAPIView):
@@ -72,7 +69,6 @@ class AtualizarQuestaoView(generics.UpdateAPIView):
         if serializer.instance.autor != self.request.user:
             raise PermissionError("Você não tem permissão para editar esta questão.")
         serializer.save()
-
 
 @extend_schema(tags=["Seção das Questões | Mobile"])
 class DeletarQuestaoView(generics.DestroyAPIView):
