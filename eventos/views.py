@@ -204,7 +204,6 @@ class MeusEventosView(generics.ListAPIView):
             .order_by("-criado_em")
         )
 
-
 # loucura do ranking
 @extend_schema(tags=["Seção de Eventos | Ranking"])
 class RankingEventoView(APIView):

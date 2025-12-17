@@ -66,12 +66,13 @@ class RegisterSerializer(serializers.ModelSerializer):
         data_nascimento = attrs.get('data_nascimento')
         username = attrs.get('username')
 
-        if email and User.objects.filter(email=email).exists():
-            raise serializers.ValidationError({'email': "Este e-mail já está sendo usado!"})
-
         if username and User.objects.filter(username=username).exists():
             raise serializers.ValidationError({'nome_de_usuario': "Este nome de usuário já existe por aqui :)"})
         
+
+        if email and User.objects.filter(email=email).exists():
+            raise serializers.ValidationError({'email': "Este e-mail já está sendo usado!"})
+
         if data_nascimento and data_nascimento > date.today():
             raise serializers.ValidationError({'data_nascimento': "Já existe máquina do tempo? A data de nascimento não pode ser no futuro! :)"})
 
@@ -132,7 +133,6 @@ class AlterarSenhaSerializer(serializers.Serializer):
         senha_atual = attrs.get('senha_atual')
         nova_senha = attrs.get('nova_senha') or ""
         confirmar_senha = attrs.get('confirmar_senha')
-        errors = {}
 
         if not user.check_password(senha_atual):
             raise serializers.ValidationError({
@@ -179,7 +179,7 @@ class EsqueciSenhaSerializer(serializers.Serializer):
     def validate(self, attrs):
         email = attrs.get("email")
         if not User.objects.filter(email=email).exists():
-            # validação pelo e-mail, como você pediu ;)
+            # validação pelo e-mail
             raise serializers.ValidationError({
                 "email": "Não encontramos nenhuma conta com este e-mail."
             })
@@ -213,7 +213,6 @@ class EsqueciSenhaSerializer(serializers.Serializer):
 
         return {"uid": uidb64, "token": token}
 
-
 class RedefinirSenhaSerializer(serializers.Serializer):
     uid = serializers.CharField()
     token = serializers.CharField()
@@ -226,8 +225,7 @@ class RedefinirSenhaSerializer(serializers.Serializer):
         nova_senha = attrs.get("nova_senha") or ""
         confirmar_senha = attrs.get("confirmar_senha")
 
-        # validações de senha no mesmo estilo do RegisterSerializer:
-
+        # validações de senha no mesmo estilo
         if len(nova_senha) < 8:
             raise serializers.ValidationError({
                 "nova_senha": "A nova senha precisa de pelo menos uns 8 caracteres :)"

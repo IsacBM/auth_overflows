@@ -39,6 +39,7 @@ class Evento(models.Model):
         default=PUBLICO
     )
 
+    # Ajeitar isso aqui dps, acabei deixando sem limite
     limite_participantes = models.PositiveIntegerField(
         validators=[MinValueValidator(1)],
         null=True,

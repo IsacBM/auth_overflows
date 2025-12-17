@@ -15,15 +15,15 @@ from .views import (
 )
 
 urlpatterns = [
-    path("eventos/", ListarEventosView.as_view(), name="listar-eventos"),
-    path("eventos/criar/", CriarEventoView.as_view(), name="criar-evento"),
-    path("eventos/<int:pk>/", DetalheEventoView.as_view(), name="detalhar-evento"),
-    path("eventos/<int:pk>/atualizar/", AtualizarEventoView.as_view(), name="atualizar-evento"),
-    path("eventos/<int:pk>/deletar/", DeletarEventoView.as_view(), name="deletar-evento"),
-    path("eventos/entrar/", EntrarNoEventoView.as_view(), name="entrar-evento"),
-    path("eventos/meus/", MeusEventosView.as_view(), name="meus-eventos"),
+    path("/lista/", ListarEventosView.as_view(), name="listar-eventos"),
+    path("/criar/", CriarEventoView.as_view(), name="criar-evento"),
+    path("/<int:pk>/", DetalheEventoView.as_view(), name="detalhar-evento"),
+    path("/<int:pk>/atualizar/", AtualizarEventoView.as_view(), name="atualizar-evento"),
+    path("/<int:pk>/deletar/", DeletarEventoView.as_view(), name="deletar-evento"),
+    path("/entrar/", EntrarNoEventoView.as_view(), name="entrar-evento"),
+    path("/meus/", MeusEventosView.as_view(), name="meus-eventos"),
     
-    path("eventos/<int:evento_pk>/questoes/",ListarQuestoesDoEventoView.as_view(),name="listar-questoes-evento"),
-    path("eventos/<int:evento_pk>/questoes/criar/", CriarQuestaoNoEventoView.as_view(), name="criar-questao-evento"),
-    path("eventos/<int:evento_pk>/ranking/", RankingEventoView.as_view(), name="ranking-evento"),
+    path("/<int:evento_pk>/questoes/",ListarQuestoesDoEventoView.as_view(),name="listar-questoes-evento"),
+    path("/<int:evento_pk>/questoes/criar/", CriarQuestaoNoEventoView.as_view(), name="criar-questao-evento"),
+    path("/<int:evento_pk>/ranking/", RankingEventoView.as_view(), name="ranking-evento"),
 ]

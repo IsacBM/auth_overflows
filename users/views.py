@@ -15,7 +15,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     """
     Serializer pra login com JWT, retornando também dados do usuário.
     """
-    
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
@@ -26,7 +25,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data = super().validate(attrs)
         data['user'] = UserSerializer(self.user).data
         return data
-
 
 class LoginView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
@@ -41,13 +39,14 @@ class LoginView(TokenObtainPairView):
             OpenApiExample(
                 name="Exemplo de requisição",
                 value={
-                    "username": "flowPython",
-                    "password": "123",
+                    "username": "Flow.py",
+                    "password": "1221",
                 },
                 request_only=True,
             ),
         ],
     )
+    
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
 
@@ -62,7 +61,6 @@ class AtualizarTokenView(TokenRefreshView):
     )
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
-
 
 class CadastroView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -95,7 +93,6 @@ class CadastroView(generics.CreateAPIView):
     )
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
-
 
 class AlterarSenhaView(APIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -157,7 +154,6 @@ class EsqueciSenhaView(APIView):
             "mensagem": "Se encontramos este e-mail na plataforma, enviamos um link de redefinição."
         })
 
-
 class RedefinirSenhaView(APIView):
     permission_classes = [permissions.AllowAny]
 
@@ -184,6 +180,7 @@ class RedefinirSenhaView(APIView):
             ),
         ],
     )
+
     def post(self, request, *args, **kwargs):
         serializer = RedefinirSenhaSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
