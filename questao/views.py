@@ -108,7 +108,7 @@ class DeletarQuestaoView(generics.DestroyAPIView):
             raise PermissionDenied("Você não tem permissão para deletar essa questão.")
         instance.delete()
 
-@extend_schema(tags=["Seção de Questões | Submissão de Resposta:"])
+# Avaliar a construção disso aqui depois e reajustar de acordo com o Judge0
 @extend_schema(tags=["Seção de Questões | Submissão de Resposta"])
 class SubmeterSolucaoView(APIView):
     permission_classes = [permissions.IsAuthenticated]
